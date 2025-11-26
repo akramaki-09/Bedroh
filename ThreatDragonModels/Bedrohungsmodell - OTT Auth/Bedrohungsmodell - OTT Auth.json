@@ -1153,6 +1153,10 @@
               {
                 "x": 243,
                 "y": -8
+              },
+              {
+                "x": 243,
+                "y": 80
               }
             ]
           },
@@ -1544,57 +1548,6 @@
                   "name": "block"
                 },
                 "sourceMarker": {
-                  "name": "block"
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "OTT",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": true,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "OTT"
-            ],
-            "id": "bee1a68e-ebb5-496b-9d2c-72483232f056",
-            "source": {
-              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa",
-              "port": "d48d4c2e-5eb7-4142-b3a2-59529463f0de"
-            },
-            "target": {
-              "cell": "0c232949-13d5-4073-ae8e-484be9943813",
-              "port": "3c60ec2d-9d8a-4197-9bb4-b3acb2516391"
-            },
-            "vertices": [
-              {
-                "x": 310,
-                "y": -20
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
                   "name": ""
                 },
                 "strokeDasharray": null
@@ -1747,7 +1700,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "",
+              "name": "OTT",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -1760,16 +1713,61 @@
               "threats": []
             },
             "labels": [
-              ""
+              "OTT"
             ],
-            "id": "96475980-9e95-4b55-a468-6d6a7fb2e477",
+            "id": "87ddf568-85f1-40fb-ac79-32ad61fbf671",
             "source": {
-              "x": 225,
+              "x": 571,
+              "y": 311
+            },
+            "target": {
+              "cell": "0c232949-13d5-4073-ae8e-484be9943813",
+              "port": "3c9a473e-d5de-4657-92fb-62f6f730fd19"
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "OTT",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "OTT"
+            ],
+            "id": "7bed8d8b-0df5-4c74-9757-46a7a72ab656",
+            "source": {
+              "x": 320,
               "y": 53
             },
             "target": {
-              "x": 325,
-              "y": 153
+              "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa",
+              "port": "d48d4c2e-5eb7-4142-b3a2-59529463f0de"
             }
           },
           {
@@ -2162,6 +2160,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 15,
             "ports": {
               "groups": {
                 "top": {
@@ -2245,7 +2244,6 @@
               ]
             },
             "id": "8adb1103-a1ea-4ae5-94a4-960dd7b5dda3",
-            "zIndex": 15,
             "data": {
               "type": "tm.Process",
               "name": "SIEM\n-System",
@@ -2282,6 +2280,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 16,
             "ports": {
               "groups": {
                 "top": {
@@ -2365,7 +2364,6 @@
               ]
             },
             "id": "0c232949-13d5-4073-ae8e-484be9943813",
-            "zIndex": 16,
             "data": {
               "type": "tm.Process",
               "name": "allsecure ott\nservice",
@@ -2402,6 +2400,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 17,
             "ports": {
               "groups": {
                 "top": {
@@ -2485,7 +2484,6 @@
               ]
             },
             "id": "40484059-1a52-4cbc-8475-bada888d5d56",
-            "zIndex": 17,
             "data": {
               "type": "tm.Actor",
               "name": "Management",
