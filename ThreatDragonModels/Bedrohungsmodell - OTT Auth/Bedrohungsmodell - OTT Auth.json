@@ -265,12 +265,18 @@
               "hasOpenThreats": false,
               "isWebApplication": null,
               "handlesCardPayment": null,
-              "handlesGoodsOrServices": null
+              "handlesGoodsOrServices": null,
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 1,
+                "elevationOfPrivilege": 0
+              }
             },
             "tools": {
               "items": [
-                "boundary",
-                "button-remove",
                 "boundary",
                 "button-remove"
               ],
@@ -392,16 +398,16 @@
               "threats": [
                 {
                   "id": "40413269-3f32-4e0c-9098-983e7b9f9ec9",
-                  "title": "Abstreiten der OTT-Verwendung",
+                  "title": "Identitätsfälschung",
                   "status": "Mitigated",
                   "severity": "Medium",
-                  "type": "Repudiation",
-                  "description": "Ein Benutzer könnte bestreiten, einen OTT verwendet zu haben. Ohne signierte Logs ist dies nicht beweisbar.\n\nCAPEC-207 (Abstreitbarkeit):\n„Ein Angreifer leugnet seine Aktion, wenn unzureichende Logs vorhanden sind.“\nATT&CK: T1562.006 – Deaktivierung/Manipulation von Logs:\n„Der Angreifer versucht, Log-Systeme zu manipulieren oder zu deaktivieren.\nD: 6 / R: 7 / E: 6 / A: 6 / DREA: 25",
-                  "mitigation": "SIEM speichert Logs unveränderbar (Write-Once)\nZeitstempel-Signaturen (RFC 3161)\nHash-Ketten zur Sicherung der Log-Integrität\nASVS 9.1 – Sichere Audit-Log-Speicherung\n\nD: 2 / R: 6 / E: 2 / A: 5 / Neuer DREA: 15",
+                  "type": "Spoofing",
+                  "description": "Ein Angreifer könnte sich als legitimer 2FA-Dienst ausgeben, um gefälschte OTT-Tokens zu versenden oder Auth-Challenges zu manipulieren.\n\nCAPEC-151 (Identitätsfälschung):\n„Ein Angreifer imitiert eine vertrauenswürdige Entität, um unerlaubten Zugriff zu erhalten.“\n\nATT&CK: TA0006 – Zugriff auf Zugangsdaten:\n„Angreifer erlangen Authentifizierungsdaten, um Systeme zu imitieren.“\n\nDREA:\nD: 8 / R: 8 / E: 7 / A: 9\nScore: 32",
+                  "mitigation": "mTLS zwischen allen internen Allsecure-Services verwenden, damit sich Services gegenseitig sicher authentifizieren.\n\nDEFEND: D3-MFA – Mutual Authentication:\n„Sorgt dafür, dass sich beide Kommunikationspartner eindeutig gegenseitig authentifizieren.“\n\nASVS: 2.1 / 2.2 – Service-zu-Service-Authentifizierung\n\nD: 4 / R: 7 / E: 3 / A: 7 / Neuer DREA: 21\n",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 105,
-                  "score": "25"
+                  "score": "21"
                 }
               ],
               "hasOpenThreats": false,
@@ -412,13 +418,14 @@
               "handlesCardPayment": null,
               "isWebApplication": null,
               "threatFrequency": {
-                "spoofing": 0,
+                "spoofing": 3,
                 "tampering": 0,
                 "repudiation": 3,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
                 "elevationOfPrivilege": 0
-              }
+              },
+              "handlesGoodsOrServices": null
             }
           },
           {
@@ -695,7 +702,8 @@
               "isEncrypted": false,
               "isPublicNetwork": false,
               "handlesCardPayment": null,
-              "handlesGoodsOrServices": null
+              "handlesGoodsOrServices": null,
+              "isWebApplication": null
             }
           },
           {
@@ -1296,55 +1304,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Log(Login, OTT, Phone Number)",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Log(Login, OTT, Phone Number)"
-            ],
-            "id": "81c8482c-19ed-41ab-bae2-a5561223b4b5",
-            "source": {
-              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
-            },
-            "target": {
-              "cell": "c2716661-ef88-48a8-8d0f-724e1923d562"
-            },
-            "vertices": [
-              {
-                "x": 559.5,
-                "y": -60
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Nummer auslesen",
               "description": "",
               "outOfScope": false,
@@ -1775,18 +1734,18 @@
                   "id": "ef9ed560-6203-4f20-8403-86d4277ce844",
                   "title": "Manipulation des OTT während der Übertragung",
                   "status": "Mitigated",
-                  "severity": "High",
+                  "severity": "Medium",
                   "type": "Tampering",
-                  "description": "Ein Angreifer im Telefonnetz könnte den OTT abfangen oder verändern, bevor er das Endgerät erreicht.\n\nCAPEC-94 (Man-in-the-Middle):\n„Ein Angreifer fängt Kommunikation zwischen zwei Parteien ab und verändert sie.“\n\nATT&CK: T1557 – Adversary-in-the-Middle:\n„Der Angreifer sitzt zwischen zwei Kommunikationspartnern und manipuliert Daten.“\nD: 7 / R: 8 / E: 8 / A: 7 / DREA: 30",
-                  "mitigation": "OTT Ende-zu-Ende verschlüsseln\nTokens nur einmal gültig, kurze Ablaufzeiten\nReplay-Schutz (Nonce + Timestamp)\nSignaturen oder HMAC für Integrität\n\nASVS 7.2 – Schutz der Datenintegrität\n\nD: 3 / R: 6 / E: 3 / A: 6 / Neuer DREA: 18",
+                  "description": "Ein Angreifer kann das OTT-Token während des Transports verändern oder manipulieren (Man-in-the-Middle).\n\nCAPEC-94 (Man-in-the-Middle):\n„Ein Angreifer fängt Kommunikation zwischen zwei Parteien ab und kann diese verändern.“\n\nATT&CK: TA0001 – Initial Access / MITM:\n„Der Angreifer manipuliert Daten, die zwischen Systemen übertragen werden.“\n\nDREA:\nD: 7 / R: 8 / E: 6 / A: 7\nScore: 28",
+                  "mitigation": "Transportverschlüsselung (TLS 1.3) und Integritätsprüfungen (HMAC) nutzen, um OTT-Manipulation zu verhindern.\n\nDEFEND: D3-TDE – Transport Data Encryption:\n„Schützt Daten bei der Übertragung, indem sie verschlüsselt und vor Manipulation gesichert werden.“\n\nASVS: 9.1 – Schutz der Datenintegrität\n\nD: 3 / R: 7 / E: 4 / A: 6 / Neuer DREA: 20\n",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 104,
-                  "score": "30"
+                  "score": "20"
                 }
               ],
               "threatFrequency": {
-                "tampering": 3,
+                "tampering": 7,
                 "informationDisclosure": 0,
                 "denialOfService": 0
               }
@@ -1809,7 +1768,7 @@
                 "y": 230
               },
               {
-                "x": 460,
+                "x": 480,
                 "y": 210
               },
               {
@@ -1821,8 +1780,8 @@
                 "y": 180
               },
               {
-                "x": 420,
-                "y": 180
+                "x": 380,
+                "y": 140
               }
             ]
           },
@@ -1870,6 +1829,55 @@
               "cell": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa",
               "port": "d48d4c2e-5eb7-4142-b3a2-59529463f0de"
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Log(Login, OTT, Phone Number)",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Log(Login, OTT, Phone Number)"
+            ],
+            "id": "81c8482c-19ed-41ab-bae2-a5561223b4b5",
+            "source": {
+              "cell": "94f68ce7-aa88-45a4-ba41-c0b62d6a959c"
+            },
+            "target": {
+              "cell": "c2716661-ef88-48a8-8d0f-724e1923d562"
+            },
+            "vertices": [
+              {
+                "x": 559.5,
+                "y": -60
+              }
+            ]
           },
           {
             "position": {
@@ -2112,7 +2120,28 @@
               "isEncrypted": false,
               "isSigned": false,
               "hasOpenThreats": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "081765af-1933-46c6-bdd8-8affcfcb8c11",
+                  "title": "Abfangen von OTT-Daten",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "Ein Angreifer könnte unberechtigt auf Telefonummern zugreifen, die für den OTT-Versand verwendet werden.\n\nCAPEC-118 (Data Leakage):\n„Ein Angreifer greift auf vertrauliche Informationen zu, die nicht für ihn bestimmt sind.“\n\nATT&CK: TA0009 – Collection:\n„Der Angreifer sammelt sensible Daten aus kompromittierten Systemen.“\n\nDREA:\nD: 6 / R: 7 / E: 6 / A: 6\nScore: 25",
+                  "mitigation": "Zugriff auf die Telefonnum­mern-Datenbank stark einschränken und vertrauliche Daten verschlüsselt speichern.\n\nDEFEND: D3-DAE – Data-at-Rest Encryption:\n„Verschlüsselt gespeicherte Daten, sodass sie selbst bei Datenbank-Diebstahl geschützt bleiben.“\n\nASVS: 1.10 – Schutz sensibler Daten\n\nD: 3 / R: 8 / E: 3 / A: 7 / Neuer DREA: 21\n",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 108,
+                  "score": "32"
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 3,
+                "denialOfService": 0
+              },
+              "storesInventory": null
             }
           },
           {
@@ -2360,22 +2389,22 @@
               "threats": [
                 {
                   "id": "0bec8ea3-9a5b-4529-b25c-f5ed66ec07f3",
-                  "title": "Privilegieneskalation im SIEM-System",
+                  "title": "Abstreiten der OTT-Verwendung",
                   "status": "Mitigated",
-                  "severity": "High",
-                  "type": "Elevation of privilege",
-                  "description": "Ein Angreifer könnte versuchen, höhere Rechte im SIEM zu erlangen und Logs zu verändern oder zu löschen.\nCAPEC-233 (Privilegieneskalation):\n„Ein Angreifer nutzt Schwachstellen aus, um höhere Rechte zu erhalten.“\nATT&CK: TA0004 – Privilegienerweiterung:\n„Der Angreifer versucht, höhere Systemrechte zu erlangen.\nD: 8 / R: 7 / E: 6 / A: 8 / DREA: 29",
-                  "mitigation": "RBAC & Least Privilege\nMFA für Administratorzugänge\nSIEM-Härtung + gesicherte Admin-Interfaces\nMonitoring aller Admin-Logins\n\nASVS 5 – Zugriffskontrollanforderungen\n\nD: 3 / R: 5 / E: 2 / A: 4 / Neuer DREA: 14",
+                  "severity": "Medium",
+                  "type": "Repudiation",
+                  "description": "Ein Benutzer könnte bestreiten, einen OTT genutzt zu haben. Ohne signierte Logs wäre dies nicht beweisbar.\n\nCAPEC-207 (Abstreitbarkeit):\n„Ein Angreifer leugnet seine Aktion, wenn unzureichende Logs vorhanden sind.“\n\nATT&CK: TA0005 – Defense Evasion:\n„Der Angreifer versucht, Spuren zu verwischen oder Beweise zu entfernen.“\n\nDREA:\nD: 5 / R: 7 / E: 6 / A: 7\nScore: 25",
+                  "mitigation": "SIEM speichert Logs unveränderbar (Write-Once) und versieht sie mit Zeitstempel-Signaturen.\n\nDEFEND: D3-LPI – Log Protection Integrity:\n„Schützt Logs vor Veränderung, sodass Aktionen nachweisbar und nicht abstreitbar bleiben.“\n\nASVS: 9.1 – Sichere Audit-Log-Speicherung\n\nD: 3 / R: 6 / E: 3 / A: 6 / Neuer DREA: 18\n",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 107,
-                  "score": "29"
+                  "score": "25"
                 }
               ],
               "threatFrequency": {
                 "spoofing": 0,
                 "tampering": 0,
-                "repudiation": 0,
+                "repudiation": 3,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
                 "elevationOfPrivilege": 2
@@ -2504,23 +2533,23 @@
                   "id": "22236a08-f6d2-407c-b4c9-11b2c3fa02ef",
                   "title": "Identitäts-Spoofing gegen den OTT-Service",
                   "status": "Mitigated",
-                  "severity": "High",
-                  "type": "Spoofing",
-                  "description": "Ein Angreifer könnte sich als interner 2FA-Dienst ausgeben und gefälschte OTT-Tokens an den OTT-Service senden.\n\nCAPEC-151 (Identitätsfälschung):\n„Ein Angreifer imitiert eine vertrauenswürdige Entität, um unerlaubten Zugriff zu erhalten.“\n\nATT&CK: TA0006 – Zugriff auf Zugangsdaten:\n„Angreifer erlangen Authentifizierungsdaten, um Systeme zu imitieren.“\nD: 8 / R: 8 / E: 7 / A: 9 / DREA: 32",
-                  "mitigation": "mTLS für alle internen Allsecure-Services\nSicherer Umgang mit privaten Schlüsseln (HSM)\nRegelmäßige Rotation interner Zertifikate\nSIEM überwacht unautorisierte Zugriffsversuche\n\nASVS 2.1 / 2.2 – Service-zu-Service Authentifizierung\n\nD: 4 / R: 7 / E: 3 / A: 7 / Neuer DREA: 21",
+                  "severity": "Medium",
+                  "type": "Elevation of privilege",
+                  "description": "Ein Angreifer könnte versuchen, innerhalb der internen Allsecure-Infrastruktur höhere Rechte zu erlangen und OTT-Operationen auszuführen.\n\nCAPEC-233 (Privileg-Missbrauch):\n„Ein Angreifer erlangt höhere Berechtigungen, um Funktionen auszuführen, die ihm nicht zustehen.“\n\nATT&CK: TA0004 – Privilege Escalation:\n„Der Angreifer versucht, höhere Systemrechte zu erlangen.“\n\nDREA:\nD: 7 / R: 8 / E: 6 / A: 8\nScore: 29",
+                  "mitigation": "Strikte Rollen- und Berechtigungsmodelle für alle internen Services einsetzen (RBAC).\n\nDEFEND: D3-AUC – Authorization Control:\n„Stellt sicher, dass nur berechtigte Services oder Nutzer auf geschützte Funktionen zugreifen können.“\n\nASVS: 4.1 – Sichere Zugriffskontrolle\n\nD: 3 / R: 7 / E: 3 / A: 6 / Neuer DREA: 19\n",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 103,
-                  "score": "32"
+                  "score": "27"
                 }
               ],
               "threatFrequency": {
-                "spoofing": 3,
+                "spoofing": 6,
                 "tampering": 0,
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
-                "elevationOfPrivilege": 0
+                "elevationOfPrivilege": 2
               }
             }
           },
@@ -2651,7 +2680,7 @@
     ],
     "reviewer": "Georg Neugebauer",
     "diagramTop": 10,
-    "threatTop": 107
+    "threatTop": 108
   },
   "version": "2.5.0"
 }
