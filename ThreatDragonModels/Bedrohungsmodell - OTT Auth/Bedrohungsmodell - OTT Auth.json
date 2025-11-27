@@ -274,13 +274,6 @@
                 "denialOfService": 1,
                 "elevationOfPrivilege": 0
               }
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
             }
           },
           {
@@ -2125,23 +2118,30 @@
                   "id": "081765af-1933-46c6-bdd8-8affcfcb8c11",
                   "title": "Abfangen von OTT-Daten",
                   "status": "Mitigated",
-                  "severity": "High",
+                  "severity": "Medium",
                   "type": "Information disclosure",
                   "description": "Ein Angreifer könnte unberechtigt auf Telefonummern zugreifen, die für den OTT-Versand verwendet werden.\n\nCAPEC-118 (Data Leakage):\n„Ein Angreifer greift auf vertrauliche Informationen zu, die nicht für ihn bestimmt sind.“\n\nATT&CK: TA0009 – Collection:\n„Der Angreifer sammelt sensible Daten aus kompromittierten Systemen.“\n\nDREA:\nD: 6 / R: 7 / E: 6 / A: 6\nScore: 25",
                   "mitigation": "Zugriff auf die Telefonnum­mern-Datenbank stark einschränken und vertrauliche Daten verschlüsselt speichern.\n\nDEFEND: D3-DAE – Data-at-Rest Encryption:\n„Verschlüsselt gespeicherte Daten, sodass sie selbst bei Datenbank-Diebstahl geschützt bleiben.“\n\nASVS: 1.10 – Schutz sensibler Daten\n\nD: 3 / R: 8 / E: 3 / A: 7 / Neuer DREA: 21\n",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 108,
-                  "score": "32"
+                  "score": "21"
                 }
               ],
               "threatFrequency": {
                 "tampering": 0,
                 "repudiation": 0,
-                "informationDisclosure": 3,
+                "informationDisclosure": 4,
                 "denialOfService": 0
               },
               "storesInventory": null
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -2398,13 +2398,13 @@
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 107,
-                  "score": "25"
+                  "score": "19"
                 }
               ],
               "threatFrequency": {
                 "spoofing": 0,
                 "tampering": 0,
-                "repudiation": 3,
+                "repudiation": 4,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
                 "elevationOfPrivilege": 2
@@ -2540,7 +2540,7 @@
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 103,
-                  "score": "27"
+                  "score": "19"
                 }
               ],
               "threatFrequency": {
@@ -2549,7 +2549,7 @@
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
-                "elevationOfPrivilege": 2
+                "elevationOfPrivilege": 3
               }
             }
           },
