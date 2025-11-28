@@ -1721,7 +1721,7 @@
             "data": {
               "type": "tm.Flow",
               "name": "OTT",
-              "description": "",
+              "description": "Erhält den vom Kundentelefonanbieter geprüften OTT und gibt ihn an die internen Allsecure-Systeme weiter.",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
